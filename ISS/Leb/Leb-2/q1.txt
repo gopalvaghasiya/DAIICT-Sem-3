@@ -1,0 +1,73 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+ public static void main(String[] args) {
+     Scanner in = new Scanner(System.in);
+        
+     String chiffer=in.nextLine();
+     
+     int x=in.nextInt();
+     int y=in.nextInt();
+     
+     if(gcd(x,26)!=1 || y>=26){
+         System.out.println("A should be co prime and B is less than 26");
+         System.exit(0);
+     }
+     
+     System.out.println(encript(chiffer,x,y));
+   }
+    
+    public static String encript(String s,int a,int b){
+        
+        String en="";
+        
+        for(int i=0;i<s.length();i++){
+            
+            if(s.charAt(i)>=65 && s.charAt(i)<=90){
+                int val=s.charAt(i)-65;
+                
+                val*=a;
+                val+=b;
+                
+                val=val%26;
+                
+                char ch=(char)(val+65);
+                
+                en+=ch;
+            }
+            else if(s.charAt(i)>=97 && s.charAt(i)<=122){
+                int val=s.charAt(i)-97;
+                
+                val*=a;
+                val+=b;
+                
+                val=val%26;
+                
+                char ch=(char)(val+97);
+                
+                en+=ch;
+            }
+            else{
+                en+=s.charAt(i);
+                
+            }
+            
+        }
+        return en;
+    }
+    
+    
+    static int gcd(int a,int b){
+        
+        if(a==0){
+            return b;
+        }
+        
+        return gcd(b%a,a);
+    }
+}
